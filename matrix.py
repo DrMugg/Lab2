@@ -2,6 +2,7 @@ def powers(lin,a,b):
 	lout=[]
 	
 	for i in lin:
+		i=float(i)
 		templist=[]
 		aa=a
 		while aa<=b:
@@ -40,8 +41,6 @@ def printmatrix(matris):
 
 def invert(A):
 	det=A[0][0]*A[1][1]-A[1][0]*A[0][1]
-	print(A)
-	print(det)
 	return [[A[1][1]/det,-A[0][1]/det],[-A[1][0]/det,A[0][0]/det]]
 
 def loadtxt(open_file): 
