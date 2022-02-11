@@ -49,7 +49,10 @@ def loadtxt(open_file):
 	f.close()
 	listaut=[]
 	for i in lista:
-		listaut.append(str(i).split())
+		row = []
+		for num in i.split():
+			row.append(float(num))
+		listaut.append(row)
 	return listaut
 
 def makenumber(strang):

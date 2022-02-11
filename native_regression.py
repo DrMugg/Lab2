@@ -1,15 +1,20 @@
 import matrix
 import sys
 import matplotlib.pyplot as plt
-def makelist(x,y,z1,z2):
-	x=list(x)
-	y=list(y)
+
+def makelist(x1,y1,z1,z2):
+	x=[x1]
+	y=[y1]
 	while z1<z2:
-		x=x+y*z1
+		x.append(x1+y1*z1)
 		z1+=1
 	return x
+
+def temperature(b, m, temp):
+	return b + m * temp
+
 def main():
-	inputtxt="dataset1.txt"
+	inputtxt="chirps.txt"
 	if len(sys.argv)>1:
 		inputtxt=sys.argv[1]
 	xy=matrix.transpose(matrix.loadtxt(inputtxt))
@@ -18,18 +23,12 @@ def main():
 	Xp  = matrix.powers(X,0,1)
 	Yp  = matrix.powers(Y,1,1)
 	Xpt = matrix.transpose(Xp)
-
 	[[b],[m]] = matrix.matmul(matrix.invert(matrix.matmul(Xpt,Xp)),matrix.matmul(Xpt,Yp))
-	print([[b],[m]])
-	mt=makelist(b,m,0,100)
-	plt.plot(b,mt)
+	mt=makelist(b,m,1,len(X))
+	x = [min(X), max(X)]
+	y = [temperature(b, m, temp) for temp in x]
+	plt.plot(X,Y,'ro')
+	plt.plot(x,y)
 	plt.show()
 main()
 
-def makelist(x,y,z1,z2):
-	x=list(x)
-	y=list(y)
-	while z1<z2:
-		x.append(x+y*z1)
-		z1+=1
-	return x
